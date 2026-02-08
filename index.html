@@ -3,77 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Request</title>
+    <title>Happy or Sad Cat</title>
     <style>
         body {
-            background-color: #ffcccc;
-            text-align: center;
-            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0e68c;
+            overflow: hidden;
         }
-        h1 {
-            color: #ff69b4;
-            margin: 50px 0;
+        #happy, #sad {
+            display: none;
         }
-        .button {
-            padding: 15px 30px;
-            font-size: 20px;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px;
-            transition: transform 0.2s;
+        #happy {
+            animation: confetti 1s ease-in-out;
         }
-        .yes {
-            background-color: #32cd32;
+        #sad {
+            animation: sad-animation 1s ease-in-out;
         }
-        .no {
-            background-color: #ff4500;
+        @keyframes confetti {
+            0% { opacity: 0; }
+            50% { opacity: 1; transform: translateY(-300px); }
+            100% { opacity: 0; }
         }
-        .button:hover {
-            transform: scale(1.1);
+        @keyframes sad-animation {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(20px); opacity: 0.5; }
         }
     </style>
 </head>
 <body>
-
-    <h1>Will you be my Valentine?</h1>
-    <button class="button yes" id="yesBtn">Yes</button>
-    <button class="button no" id="noBtn">No</button>
+    <h1>Do you want to see a cat?</h1>
+    <button onclick="showHappyCat()">Yes</button>
+    <button onclick="showSadCat()">No</button>
+    <img id="happy" src="happy-cat.png" alt="Happy Cat" />
+    <img id="sad" src="sad-cat.png" alt="Sad Cat" />
 
     <script>
-        document.getElementById('yesBtn').addEventListener('click', function() {
-            alert('Yay! I’m so happy!');
-            startConfetti();
-        });
-
-        document.getElementById('noBtn').addEventListener('click', function() {
-            alert('That’s okay! Maybe next time.');
-        });
-
-        function startConfetti() {
-            const duration = 5 * 1000; // 5 seconds
-            const end = Date.now() + duration;
-
-            const colors = ["#FF0D00", "#00FF0D", "#0000FF", "#FF00FF", "#FFFF00"];  
-            (function frame() {
-                const currentTime = Date.now();
-                if (currentTime < end) {
-                    const particle = document.createElement('div');
-                    particle.className = 'confetti';
-                    particle.style.position = 'absolute';
-                    particle.style.width = '10px';
-                    particle.style.height = '10px';
-                    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    particle.style.left = Math.random() * window.innerWidth + 'px';
-                    particle.style.top = Math.random() * window.innerHeight + 'px';
-                    document.body.appendChild(particle);
-                    setTimeout(() => {
-                        particle.remove();
-                    }, 3000);
-                    requestAnimationFrame(frame);
-                }
-            })();
+        function showHappyCat() {
+            document.getElementById('happy').style.display = 'block';
+            document.getElementById('sad').style.display = 'none';
+            // Trigger confetti animation
+        }
+        function showSadCat() {
+            document.getElementById('sad').style.display = 'block';
+            document.getElementById('happy').style.display = 'none';
+            // Trigger sad animation
         }
     </script>
 </body>
