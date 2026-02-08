@@ -3,55 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy or Sad Cat</title>
+    <title>Happy & Sad Cat Animations</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f0e68c;
-            overflow: hidden;
+        .animation {
+            font-size: 5em;
+            display: inline-block;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
         }
-        #happy, #sad {
-            display: none;
+        .happy {
+            animation-name: happyAnimation;
         }
-        #happy {
-            animation: confetti 1s ease-in-out;
+        .sad {
+            animation-name: sadAnimation;
         }
-        #sad {
-            animation: sad-animation 1s ease-in-out;
+        @keyframes happyAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
-        @keyframes confetti {
-            0% { opacity: 0; }
-            50% { opacity: 1; transform: translateY(-300px); }
-            100% { opacity: 0; }
-        }
-        @keyframes sad-animation {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(20px); opacity: 0.5; }
+        @keyframes sadAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.8); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
-    <h1>Do you want to see a cat?</h1>
-    <button onclick="showHappyCat()">Yes</button>
-    <button onclick="showSadCat()">No</button>
-    <img id="happy" src="happy-cat.png" alt="Happy Cat" />
-    <img id="sad" src="sad-cat.png" alt="Sad Cat" />
-
-    <script>
-        function showHappyCat() {
-            document.getElementById('happy').style.display = 'block';
-            document.getElementById('sad').style.display = 'none';
-            // Trigger confetti animation
-        }
-        function showSadCat() {
-            document.getElementById('sad').style.display = 'block';
-            document.getElementById('happy').style.display = 'none';
-            // Trigger sad animation
-        }
-    </script>
+    <h1>Cat Animations</h1>
+    <div class="animation happy">😸</div>
+    <div class="animation sad">😿</div>
 </body>
 </html>
